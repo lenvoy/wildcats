@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDD2 Project 2.CSharp.Plugins", "GDD2 Project 2.CSharp.Plugins.csproj", "{0DB15D41-EF45-D717-C4DE-23DCEE20293B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDD2 Project 2.CSharp", "GDD2 Project 2.CSharp.csproj", "{71383351-FD3A-16D4-7489-DF6D802931E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GDD2 Project 2.CSharp.Editor", "GDD2 Project 2.CSharp.Editor.csproj", "{1089DA21-8640-319F-6892-D446977DB197}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DB15D41-EF45-D717-C4DE-23DCEE20293B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DB15D41-EF45-D717-C4DE-23DCEE20293B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DB15D41-EF45-D717-C4DE-23DCEE20293B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DB15D41-EF45-D717-C4DE-23DCEE20293B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71383351-FD3A-16D4-7489-DF6D802931E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71383351-FD3A-16D4-7489-DF6D802931E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71383351-FD3A-16D4-7489-DF6D802931E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71383351-FD3A-16D4-7489-DF6D802931E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1089DA21-8640-319F-6892-D446977DB197}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1089DA21-8640-319F-6892-D446977DB197}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1089DA21-8640-319F-6892-D446977DB197}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1089DA21-8640-319F-6892-D446977DB197}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
