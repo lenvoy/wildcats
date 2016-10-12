@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 public class PlayerMovement : MonoBehaviour
 {
     private PlayerMovement otherEgg;
     private int id;
+    private int amountOfPlayers; // initialize to how many players there are in each game
     public bool bounced;
-
+    private bool[] isDead; // initialize to how many players there are in each game is false
     private Vector3 velocity;
     private Vector3 friction;
     //private Vector3 rotationVector;
@@ -14,11 +14,11 @@ public class PlayerMovement : MonoBehaviour
     private float accelRate = .07f;
     public int joystickNum;
     private float mu = 0.037f;
-    private float currFrict;
+    //private float currFrict;
     //private float rotSpeed = 360;
-    private float gravity = 10f;
-    private float jumpPower = 12f;
-    private float knockPower = 1.25f;
+    private float gravity = 10f; // was 13
+    private float jumpPower = 6f; // was 15
+    private float knockPower = 1.2f; // was 1.25f
     //private float boost = .12f;
     private bool fallen;
 
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-       switch(this.name)
+        switch(this.name)
         {
             case "egg1": id = 1; break;
             case "egg2": id = 2; break;
@@ -35,15 +35,17 @@ public class PlayerMovement : MonoBehaviour
             default: id = 5; break;
         }
         eggBod = GetComponent<Rigidbody>();
+		//Debug.Log (eggBod.centerOfMass);
+		Vector3 newCenter = eggBod.centerOfMass;
+		newCenter.y *= .2f;
+		eggBod.centerOfMass = newCenter;
+        
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
         CalculateForces();
-
-        if (transform.position.y < -50)
-            Destroy(this.gameObject);
     }
 
     void CalculateForces ()
@@ -70,8 +72,8 @@ public class PlayerMovement : MonoBehaviour
         acceleration += friction;
 
         velocity += acceleration;
-        eggBod.AddForce(velocity);
-
+        //eggBod.AddForce(velocity);
+        eggBod.velocity = velocity;
     }
 
     void OnCollisionEnter(Collision a)
@@ -92,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
         else if (a.gameObject.tag == "ground" && transform.position.y > -.1)
         {
             fallen = false;
-            currFrict = mu;
+           // currFrict = mu;
         }
     }
 
@@ -101,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         if (b.gameObject.tag == "ground")
         {
             fallen = true;
-            currFrict = 0;
+            //currFrict = 0;
         }
     }
 
