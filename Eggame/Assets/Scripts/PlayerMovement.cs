@@ -9,18 +9,19 @@ public class PlayerMovement : MonoBehaviour
     private bool[] isDead; // initialize to how many players there are in each game is false
     private Vector3 velocity;
     private Vector3 friction;
-    //private Vector3 rotationVector;
-    //private Vector3 otherVector;
-    private float accelRate = .07f;
+    private float accelRate = .055f;
+    private float boostRate = .09f;
+    private float accel;
     public int joystickNum;
     private float mu = 0.037f;
-    //private float currFrict;
-    //private float rotSpeed = 360;
+    private float currFrict;
     private float gravity = 10f; // was 13
     private float jumpPower = 6f; // was 15
     private float knockPower = 1.2f; // was 1.25f
-    //private float boost = .12f;
+    private float boost = 3f;
     private bool fallen;
+
+    private float boostCool = 0;
 
     private Rigidbody eggBod;
 
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 		Vector3 newCenter = eggBod.centerOfMass;
 		newCenter.y *= .2f;
 		eggBod.centerOfMass = newCenter;
+        accel = accelRate;
         
     }
 	
@@ -59,20 +61,33 @@ public class PlayerMovement : MonoBehaviour
         else if (fallen)
             acceleration.y -= gravity * Time.deltaTime;
         else
+        {
+            velocity.y = 0;
             acceleration.y = 0;
+        }
 
-       // if (Input.GetButtonDown("Y_" + joystickString))
-           // acceleration *= boost;
+        acceleration.x += Input.GetAxis("L_XAxis_" + joystickString) * accel;
+        acceleration.z += Input.GetAxis("L_YAxis_" + joystickString) * accel;
 
-        acceleration.x += Input.GetAxis("L_XAxis_" + joystickString) * accelRate;
-        acceleration.z += Input.GetAxis("L_YAxis_" + joystickString) * accelRate;
-
-        friction = velocity.normalized * -1 * mu;
+        friction = velocity.normalized * -1 * currFrict;
 
         acceleration += friction;
 
         velocity += acceleration;
-        //eggBod.AddForce(velocity);
+
+        if (Input.GetButtonDown("X_" + joystickString) && boostCool <= 0)
+        {
+            // input.getaxisraw -> get direction of wanted boost: if between directions (-1, 0, and 1) boost in that direction
+            velocity.x *= boost;
+            velocity.z *= boost;
+            boostCool = 3f;
+            accel = boostRate;
+        }
+        else if (boostCool > 0)
+            boostCool -= Time.deltaTime;
+        else
+            accel = accelRate;
+
         eggBod.velocity = velocity;
     }
 
@@ -94,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
         else if (a.gameObject.tag == "ground" && transform.position.y > -.1)
         {
             fallen = false;
-           // currFrict = mu;
+            currFrict = mu;
         }
     }
 
@@ -103,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         if (b.gameObject.tag == "ground")
         {
             fallen = true;
-            //currFrict = 0;
+            currFrict = 0;
         }
     }
 

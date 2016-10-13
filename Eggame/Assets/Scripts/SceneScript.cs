@@ -6,7 +6,6 @@ public class SceneScript : MonoBehaviour
 {
     private List<GameObject> children;
     private int isDead = 0;
-    private int count = 0; // set to the amount of children of empty game object
     private int players = 3; // will change to a variable that keeps track of how many controllers put in input on start screen and selected an egg -> brings into this script for reference 
                              // of how many child game objects to keep track of
 	// Use this for initialization
@@ -22,7 +21,6 @@ public class SceneScript : MonoBehaviour
             children.Add(this.gameObject.transform.GetChild(i).gameObject); // will have to be replaced when we dynamically instantiate eggs rather than eggs that already exist in scene
         }
 
-        count = children.Count;
         // method to place eggs on a location in the nest based on how many eggs there are has to be made
 
         // start menu holds an array of eggs with their customization, this script holds the same array
@@ -33,9 +31,9 @@ public class SceneScript : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if (isDead >= count - 1)
+        if (isDead >= players - 1)
         {
-            Application.LoadLevel(2);
+            Application.LoadLevel(0);
         }
 
         for (int i = 0; i < children.Count; i++)
